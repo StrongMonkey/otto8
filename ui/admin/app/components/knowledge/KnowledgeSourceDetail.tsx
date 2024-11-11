@@ -313,14 +313,14 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
 
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
-            <DialogContent className=" h-[80vh] w-[80vw] max-w-none max-h-none">
+            <DialogContent className="h-[80vh] w-[80vw] max-w-none max-h-none dark:bg-gray-900">
                 <div
-                    className=" sticky top-0 bg-white z-10 overflow-y-auto mr-2"
+                    className="sticky top-0 bg-white dark:bg-gray-900 z-10 overflow-y-auto mr-2"
                     ref={tableContainerRef}
                     onScroll={handleScroll}
                 >
                     <DialogDescription></DialogDescription>
-                    <DialogTitle className="flex justify-between items-center">
+                    <DialogTitle className="flex justify-between items-center dark:text-white">
                         <div className="flex flex-row items-center">
                             <KnowledgeSourceAvatar
                                 knowledgeSourceType={getKnowledgeSourceType(
@@ -343,14 +343,18 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                     }
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:underline"
+                                    className="hover:underline dark:text-blue-400"
                                 >
                                     {getKnowledgeSourceDisplayName(
                                         knowledgeSource
                                     )}
                                 </a>
                             ) : (
-                                getKnowledgeSourceDisplayName(knowledgeSource)
+                                <span className="dark:text-white">
+                                    {getKnowledgeSourceDisplayName(
+                                        knowledgeSource
+                                    )}
+                                </span>
                             )}
                         </div>
                         <div className="flex items-center mt-4">
@@ -380,8 +384,10 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                     </DialogTitle>
                     <div className="flex flex-col gap-2 mt-2 max-h-96 w-1/2">
                         <div className="flex justify-between item-center h-[20px]">
-                            <Label>Last Synced:</Label>
-                            <Label>
+                            <Label className="dark:text-gray-300">
+                                Last Synced:
+                            </Label>
+                            <Label className="dark:text-gray-300">
                                 {knowledgeSource.lastSyncEndTime
                                     ? new Date(
                                           knowledgeSource.lastSyncEndTime
@@ -390,8 +396,10 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                             </Label>
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>Duration:</Label>
-                            <Label>
+                            <Label className="dark:text-gray-300">
+                                Duration:
+                            </Label>
+                            <Label className="dark:text-gray-300">
                                 {knowledgeSource.lastSyncEndTime &&
                                     knowledgeSource.lastSyncStartTime &&
                                     (new Date(
@@ -405,12 +413,18 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                             </Label>
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>Files Synced:</Label>
-                            <Label>{files.length}</Label>
+                            <Label className="dark:text-gray-300">
+                                Files Synced:
+                            </Label>
+                            <Label className="dark:text-gray-300">
+                                {files.length}
+                            </Label>
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>Files added to Knowledge:</Label>
-                            <Label>
+                            <Label className="dark:text-gray-300">
+                                Files added to Knowledge:
+                            </Label>
+                            <Label className="dark:text-gray-300">
                                 {
                                     files.filter(
                                         (file) =>
@@ -421,14 +435,16 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                             </Label>
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>Sync Schedule:</Label>
+                            <Label className="dark:text-gray-300">
+                                Sync Schedule:
+                            </Label>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <div className="flex items-center">
                                         <Button variant="ghost" size="icon">
-                                            <EditIcon className="h-2 w-2" />
+                                            <EditIcon className="h-2 w-2 dark:text-gray-300" />
                                         </Button>
-                                        <Label>
+                                        <Label className="dark:text-gray-300">
                                             {knowledgeSource.syncSchedule &&
                                             knowledgeSource.syncSchedule !== ""
                                                 ? cronDescription
@@ -436,9 +452,9 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                         </Label>
                                     </div>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-[150px]">
+                                <DropdownMenuContent className="w-[150px] dark:bg-gray-700">
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() => {
                                             setSyncSchedule("");
                                             onSourceUpdate(
@@ -455,7 +471,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                         />
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() => {
                                             setSyncSchedule("0 * * * *");
                                             onSourceUpdate(
@@ -473,7 +489,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                         />
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() => {
                                             setSyncSchedule("0 0 * * *");
                                             onSourceUpdate(
@@ -491,7 +507,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                         />
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() => {
                                             setSyncSchedule("0 0 * * 0");
                                             onSourceUpdate(
@@ -509,7 +525,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                         />
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() =>
                                             setIsCronDialogOpen(true)
                                         }
@@ -533,23 +549,25 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                             </DropdownMenu>
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>New Files Ingestion Policy:</Label>
+                            <Label className="dark:text-gray-300">
+                                New Files Ingestion Policy:
+                            </Label>
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <div className="flex items-center">
                                         <Button variant="ghost" size="icon">
-                                            <EditIcon className="h-2 w-2" />
+                                            <EditIcon className="h-2 w-2 dark:text-gray-300" />
                                         </Button>
-                                        <Label className="flex-grow">
+                                        <Label className="flex-grow dark:text-gray-300">
                                             {knowledgeSource.autoApprove
                                                 ? "Automatic"
                                                 : "Manual"}
                                         </Label>
                                     </div>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-[250px]">
+                                <DropdownMenuContent className="w-[250px] dark:bg-gray-700">
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() => {
                                             setAutoApprove(false);
                                             onSourceUpdate(
@@ -566,7 +584,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                         />
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer dark:text-gray-300"
                                         onClick={() => {
                                             setAutoApprove(true);
                                             onSourceUpdate(
@@ -586,7 +604,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                             </DropdownMenu>
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>State:</Label>
+                            <Label className="dark:text-gray-300">State:</Label>
                             {knowledgeSource.state ===
                             KnowledgeSourceStatus.Error ? (
                                 <Tooltip>
@@ -617,7 +635,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                     <TooltipContent>View Error</TooltipContent>
                                 </Tooltip>
                             ) : (
-                                <Label className="flex items-center">
+                                <Label className="flex items-center dark:text-gray-300">
                                     {knowledgeSource.state
                                         ?.charAt(0)
                                         .toUpperCase() +
@@ -630,23 +648,19 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                             )}
                         </div>
                         <div className="flex justify-between items-center h-[20px]">
-                            <Label>Status:</Label>
+                            <Label className="dark:text-gray-300">
+                                Status:
+                            </Label>
                             {knowledgeSource.state ===
                                 KnowledgeSourceStatus.Syncing && (
                                 <div className="break-words text-gray-400 max-w-[800px]">
-                                    <Label>{knowledgeSource.status}</Label>
+                                    <Label className="dark:text-gray-300">
+                                        {knowledgeSource.status}
+                                    </Label>
                                 </div>
                             )}
                         </div>
                     </div>
-
-                    {knowledgeSource.state ===
-                        KnowledgeSourceStatus.Syncing && (
-                        <div className="flex items-center text-gray-400 justify-end">
-                            <Label>Loading files...</Label>
-                            <LoadingSpinner className="w-4 h-4 mr-2" />
-                        </div>
-                    )}
 
                     <div className="mt-4 max-h-96">
                         <Table>
@@ -660,15 +674,15 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                         variant="ghost"
                                                         size="icon"
                                                     >
-                                                        <Plus className="h-4 w-4" />
+                                                        <Plus className="h-4 w-4 dark:text-gray-300" />
                                                     </Button>
                                                 </AlertDialogTrigger>
-                                                <AlertDialogContent>
+                                                <AlertDialogContent className="dark:bg-gray-700">
                                                     <AlertDialogHeader>
-                                                        <AlertDialogTitle>
+                                                        <AlertDialogTitle className="dark:text-gray-300">
                                                             Include All Files
                                                         </AlertDialogTitle>
-                                                        <AlertDialogDescription>
+                                                        <AlertDialogDescription className="dark:text-gray-300">
                                                             This will
                                                             immediately ingest
                                                             all files in the
@@ -676,7 +690,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                         </AlertDialogDescription>
                                                     </AlertDialogHeader>
                                                     <AlertDialogFooter>
-                                                        <AlertDialogCancel>
+                                                        <AlertDialogCancel className="dark:text-gray-300">
                                                             Cancel
                                                         </AlertDialogCancel>
                                                         <AlertDialogAction
@@ -713,10 +727,12 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                     );
                                                 }}
                                             >
-                                                <Label>Document</Label>
+                                                <Label className="dark:text-gray-300">
+                                                    Document
+                                                </Label>
                                                 {sortingOrder === "asc" ? (
                                                     <ArrowUpDown
-                                                        className="h-4 w-4"
+                                                        className="h-4 w-4 dark:text-gray-300"
                                                         strokeWidth={
                                                             sortingColumn ===
                                                             "fileName"
@@ -726,7 +742,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                     />
                                                 ) : (
                                                     <ArrowDownUp
-                                                        className="h-4 w-4"
+                                                        className="h-4 w-4 dark:text-gray-300"
                                                         strokeWidth={
                                                             sortingColumn ===
                                                             "fileName"
@@ -756,10 +772,12 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                     );
                                                 }}
                                             >
-                                                <Label>State</Label>
+                                                <Label className="dark:text-gray-300">
+                                                    State
+                                                </Label>
                                                 {sortingOrder === "asc" ? (
                                                     <ArrowUpDown
-                                                        className="h-4 w-4"
+                                                        className="h-4 w-4 dark:text-gray-300"
                                                         strokeWidth={
                                                             sortingColumn ===
                                                             "state"
@@ -769,7 +787,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                     />
                                                 ) : (
                                                     <ArrowDownUp
-                                                        className="h-4 w-4"
+                                                        className="h-4 w-4 dark:text-gray-300"
                                                         strokeWidth={
                                                             sortingColumn ===
                                                             "state"
@@ -783,12 +801,16 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                     </TableHead>
                                     <TableHead>
                                         <div className="flex items-center justify-center">
-                                            <Label>Ingestion Time</Label>
+                                            <Label className="dark:text-gray-300">
+                                                Ingestion Time
+                                            </Label>
                                         </div>
                                     </TableHead>
                                     <TableHead>
                                         <div className="flex items-center justify-center">
-                                            <Label>File Size</Label>
+                                            <Label className="dark:text-gray-300">
+                                                File Size
+                                            </Label>
                                         </div>
                                     </TableHead>
                                 </TableRow>
@@ -897,7 +919,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                     file.state ===
                                                         KnowledgeFileState.Unapproved
                                                         ? "text-gray-400"
-                                                        : ""
+                                                        : "dark:text-gray-300"
                                                 }`}
                                             >
                                                 {renderFileElement(
@@ -920,12 +942,16 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                 ) : file.state ===
                                                   KnowledgeFileState.Ingesting ? (
                                                     <div className="flex justify-center items-center">
-                                                        <Label>Ingesting</Label>
+                                                        <Label className="dark:text-gray-300">
+                                                            Ingesting
+                                                        </Label>
                                                     </div>
                                                 ) : file.state ===
                                                   KnowledgeFileState.Pending ? (
                                                     <div className="flex justify-center items-center">
-                                                        <Label>Pending</Label>
+                                                        <Label className="dark:text-gray-300">
+                                                            Pending
+                                                        </Label>
                                                     </div>
                                                 ) : file.state ===
                                                   KnowledgeFileState.Error ? (
@@ -983,7 +1009,9 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                 ) : file.state ===
                                                   KnowledgeFileState.Ingested ? (
                                                     <div className="flex justify-center items-center text-success">
-                                                        <Label>Ingested</Label>
+                                                        <Label className="dark:text-gray-300">
+                                                            Ingested
+                                                        </Label>
                                                     </div>
                                                 ) : file.state ===
                                                   KnowledgeFileState.Unsupported ? (
@@ -992,7 +1020,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                                             <TooltipTrigger
                                                                 asChild
                                                             >
-                                                                <Label className="cursor-pointer">
+                                                                <Label className="cursor-pointer dark:text-gray-300">
                                                                     Unsupported
                                                                 </Label>
                                                             </TooltipTrigger>
@@ -1005,7 +1033,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="flex items-center justify-center">
+                                            <div className="flex items-center justify-center dark:text-gray-300">
                                                 {file.lastIngestionEndTime &&
                                                 file.lastIngestionStartTime
                                                     ? (new Date(
@@ -1020,7 +1048,7 @@ const KnowledgeSourceDetail: FC<KnowledgeSourceDetailProps> = ({
                                             </div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="flex items-center justify-center text-gray-400">
+                                            <div className="flex items-center justify-center text-gray-400 dark:text-gray-300">
                                                 {file.sizeInBytes
                                                     ? file.sizeInBytes > 1000000
                                                         ? (
